@@ -16,6 +16,12 @@ public class Object {
     Animation[] animations = new Animation[0];
     Image image;
     Collision coll;
+    Motion motion = new Motion(0, 0);
+
+    static int FoundedID = -1;
+    public static Object FoundedObject = null;
+
+    int thisID;
     
     public boolean HitBox = true;
     public boolean Trigger = true;
@@ -75,6 +81,11 @@ public class Object {
         }
         if(HitBox)
         {
+            if(FoundedID == coll.GetID() && Trigger)
+            {
+                FoundedObject = this;
+                FoundedID = -1;
+            }
             coll.Create();
         }
     }
@@ -82,29 +93,57 @@ public class Object {
     public void SetLocation(PointF location)
     {
         this.location = location;
+        coll.ChangeCollision(size, location.ToIntPoint());
     }
 
     public void SetSize(Size size)
     {
         this.size = size;
+        coll.ChangeCollision(size, location.ToIntPoint());
     }
 
     public void Move(Motion motion)
     {
         if(Trigger)
         {
-            PointF p = new PointF(location.X() + motion.X(), location.Y() + motion.Y());
-
-            for(int i = 0; i < size.Width();i++) for(int j = 0; j < size.Height();j++)
+            this.motion = motion;
+            if(coll.GetID(motion) != 0) 
             {
-                int id = Collision.GetID(p.IntX() + i, p.IntY() + j);
-                if(id != coll.GetID() && id != 0) 
-                {
-                    return;
-                }
+                motion = new Motion(0, 0);
+                return;
             }
         }
         location.AddPointF(new PointF(motion.X(), motion.Y()));
         coll.ChangeCollision(size, location.ToIntPoint());
+    }
+
+    public int GetID()
+    {
+        return coll.GetID();
+    }
+
+    public Collision GetCollision()
+    {
+        return coll;
+    }
+
+    public Motion GetMotion()
+    {
+        return motion;
+    }
+
+    public PointF GetLocation()
+    {
+        return location;
+    }
+
+    public Size GetSize()
+    {
+        return size;
+    }
+
+    public static void SetFoundedID(int ID)
+    {
+        FoundedID = ID;
     }
 }

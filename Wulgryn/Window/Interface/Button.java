@@ -59,7 +59,7 @@ public class Button {
                     e.printStackTrace();
                 }
             }
-            if(Input.GetButtonDown(Mouse.ANY))
+            if(Input.GetButton(Mouse.ANY))
             {
                 if(ClickImage == null)
                 {

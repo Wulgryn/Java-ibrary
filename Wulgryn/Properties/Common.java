@@ -26,4 +26,9 @@ public class Common {
         }
         return calc / num.length;
     }
+
+    public static void ClearUnUsedRam()
+    {
+        System.gc();
+    }
 }

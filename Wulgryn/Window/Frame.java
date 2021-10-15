@@ -1,7 +1,10 @@
 package Wulgryn.Window;
 
 import java.lang.reflect.Method;
-import java.awt.*;
+import java.util.Arrays;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.FocusEvent;
@@ -10,6 +13,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.event.WindowStateListener;
 import java.awt.image.BufferedImage;
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JFrame;
@@ -17,6 +21,9 @@ import javax.swing.JFrame;
 import Wulgryn.Parameters.Point;
 import Wulgryn.Window.Game2D.Components.Collision;
 import Wulgryn.Window.InputHandler.Input;
+import Wulgryn.Window.InputHandler.Keycode;
+import Wulgryn.Window.InputHandler.Mouse;
+import Wulgryn.Window.Paint.PaintF;
 
 public class Frame {
     
@@ -25,7 +32,7 @@ public class Frame {
 
 
     private static BufferedImage frameImage;
-    private static Color backColor = Color.black;
+    private static Color backColor = Color.BLACK;
     private static int FPS = 0;
 
     public static Graphics frame;
@@ -34,6 +41,8 @@ public class Frame {
 
     public static boolean ShowFPS = false;
     public static int FPS_limit = 60;
+
+    public static boolean Enabled = true;
 
     static
     {
@@ -195,7 +204,7 @@ public class Frame {
     {
         public static Point Get()
         {
-            return new Point(window.getY(), window.getY());
+            return new Point(window.getX(), window.getY());
         }
         public static void Set(Point point)
         {
@@ -252,9 +261,8 @@ public class Frame {
 
     public static void Render(Method setup,Method start,Method update,Method lateUpdate)
     {
-        Setup(setup);
-
         window.setSize(1000,1000);
+        Setup(setup);
         if(window.getWidth() > 0 && window.getHeight() > 0)
         {
             frameImage = new BufferedImage(window.getWidth(),window.getHeight(),BufferedImage.TYPE_INT_RGB);
@@ -270,6 +278,7 @@ public class Frame {
             public void run() {
                 FrameCounter fc = new FrameCounter();
                 long last = 0;
+                PaintF.g = (Graphics2D)frame;
                 while(true)
                 {
                     if(last + (1000 / FPS_limit) < System.currentTimeMillis())
@@ -284,6 +293,8 @@ public class Frame {
                             frame.fillRect(0, 0, frameImage.getWidth(), frameImage.getHeight());
                         }
                         Update(update);
+                        Mouse.ResetButtons();
+                        Keycode.ResetKeys();
                         fc.Add();
                         FPS = fc.Get();
                         if(ShowFPS && frameImage != null) 
@@ -301,24 +312,27 @@ public class Frame {
     private static void Setup(Method setup)
     {
         try {
-            setup.invoke(null);
+            if(setup != null)setup.invoke(null);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     private static void Start(Method start)
     {
         try {
-            start.invoke(null);
+            if(start != null)start.invoke(null);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     private static void LateUpdate(Method lateUpdate)
     {
         try {
-            lateUpdate.invoke(null);
+            if(lateUpdate != null)lateUpdate.invoke(null);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -340,11 +354,65 @@ public class Frame {
             frame = frameImage.getGraphics();
         }
         else frameImage = null;
-        Paint.g = frame;
+        PaintF.g = (Graphics2D)frame;
     }
 
     public static int GetFPS()
     {
         return FPS;
+    }
+
+    public static void SetFullScreen()
+    {
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
+
+    public static void Focus()
+    {
+        window.toFront();
+        window.requestFocus();
+    }
+
+    public static void SetAlwaysOnTop(boolean b)
+    {
+        window.setAlwaysOnTop(b);
+    }
+
+    public static void SetTitle(String title)
+    {
+        window.setTitle(title);
+    }
+
+    public static void SetSizeable(boolean b)
+    {
+        window.setResizable(b);
+    }
+
+    public static void SetShape(Shape shape)
+    {
+        window.setUndecorated(true);
+        window.setShape(shape);
+    }
+
+    public static void SetIcon(Image image,Wulgryn.Parameters.Size size)
+    {
+        java.awt.Image icon = image.Get().getScaledInstance(size.Width(), size.Height(), size.Width());
+        java.awt.Image ticon = null;
+        if(window.getIconImages().size() > 1)
+        {
+            ticon = window.getIconImages().get(1);
+        }
+        window.setIconImages(Arrays.asList(new java.awt.Image[]{icon,ticon}));
+    }
+
+    public static void SetTaskBarIcon(Image image,Wulgryn.Parameters.Size size)
+    {
+        java.awt.Image ticon = image.Get().getScaledInstance(size.Width(), size.Height(), size.Width());
+        java.awt.Image icon = image.Get().getScaledInstance(size.Width(), size.Height(), size.Width());;
+        if(window.getIconImages().size() > 0)
+        {
+            icon = window.getIconImages().get(0);
+        }
+        window.setIconImages(Arrays.asList(new java.awt.Image[]{icon,ticon}));
     }
 }

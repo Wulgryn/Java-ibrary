@@ -11,6 +11,16 @@ public class Mouse {
     protected static Point ScreenLocation;
     protected static Point WindowLocation;
 
+    private static int direction_ = 0;
+
+    static
+    {
+        ANY = new MouseButton();
+        LEFT = new MouseButton();
+        MIDDLE = new MouseButton();
+        RIGHT = new MouseButton();
+    }
+
     public static Point GetWindowLocation()
     {
         return WindowLocation;
@@ -23,6 +33,21 @@ public class Mouse {
 
     public static int GetWheelRotation()
     {
-        return MouseButton.GetDirection();
+        int d = direction_;
+        direction_ = 0;
+        return d;
+    }
+
+    protected static void SetDirection(int direction)
+    {
+        direction_ = direction;
+    }
+
+    public static void ResetButtons()
+    {
+        if(ANY.GetUp()) ANY.states[1] = false;
+        if(LEFT.GetUp()) LEFT.states[1] = false;
+        if(MIDDLE.GetUp()) MIDDLE.states[1] = false;
+        if(RIGHT.GetUp()) RIGHT.states[1] = false;
     }
 }

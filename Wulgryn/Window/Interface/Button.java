@@ -5,131 +5,160 @@ import java.lang.reflect.Method;
 
 import Wulgryn.Parameters.Point;
 import Wulgryn.Parameters.Size;
+import Wulgryn.Window.Fonts;
 import Wulgryn.Window.Image;
-import Wulgryn.Window.Paint;
 import Wulgryn.Window.InputHandler.Input;
 import Wulgryn.Window.InputHandler.Mouse;
+import Wulgryn.Window.Paint.PaintF;
 
 public class Button {
-    Size size;
-    Point location;
+    private Size size;
+    private Point location;
 
-    Method onHover;
-    Method onClick;
+    private Method onHover;
+    private Method onClick;
 
-    Image DefaultImage;
-    Image hoverImage;
-    Image ClickImage;
+    private Image DefaultImage;
+    private Image hoverImage;
+    private Image ClickImage;
 
-    public Button(Size size, Point location)
+    private String title = "";
+    private boolean drawTitle = true;
+
+    private boolean canclick = true;
+
+    private boolean click = false;
+
+    public Button(Size size, Point location) {
+        this.size = size;
+        this.location = location;
+    }
+
+    public void DrawTitle(boolean b)
+    {
+        drawTitle = b;
+    }
+
+    public void SetTitle(String title)
+    {
+        this.title = title;
+    }
+
+    public void ChangeButton(Size size, Point location)
     {
         this.size = size;
         this.location = location;
     }
 
-    public void Create()
-    {
+    public void Create() {
         int mx = 0;
         int my = 0;
         try {
             mx = Mouse.GetWindowLocation().X();
-            my = Mouse.GetWindowLocation().Y();   
+            my = Mouse.GetWindowLocation().Y();
         } catch (Exception e) {
         }
 
         int endW = location.X() + size.Width();
         int endH = location.Y() + size.Height();
-        if(DefaultImage == null)
-        {
-            Paint.Draw.Square(location.X(), location.Y(), size.Width(), size.Height(), Color.green);
+        if (DefaultImage == null) {
+            PaintF.Draw.Square(location.X(), location.Y(), size.Width(), size.Height(), Color.green);
+        } else {
+            PaintF.Draw.Image(location.X(), location.Y(), DefaultImage.Get());
         }
-        else Paint.Draw.Image(location.X(), location.Y(), DefaultImage.Get());
-        if(mx > location.X() && mx < endW && my > location.Y() && my < endH)
-        {
-            if(hoverImage == null)
-            {
-                Paint.Draw.Square(location.X(), location.Y(), size.Width(), size.Height(), Color.orange);
+        if (mx > location.X() && mx < endW && my > location.Y() && my < endH) {
+            if (hoverImage == null) {
+                PaintF.Draw.Square(location.X(), location.Y(), size.Width(), size.Height(), Color.orange);
+            } else {
+                PaintF.Draw.Image(location.X(), location.Y(), hoverImage.Get());
             }
-            else Paint.Draw.Image(location.X(), location.Y(), hoverImage.Get());
-            if(onHover != null)
-            {
+            if (onHover != null) {
                 try {
                     onHover.invoke(null);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-            if(Input.GetButton(Mouse.ANY))
-            {
-                if(ClickImage == null)
-                {
-                    Paint.Draw.Square(location.X(), location.Y(), size.Width(), size.Height(), Color.red);
+            if (Input.GetButtonDown(Mouse.ANY) && canclick) {
+                canclick = false;
+                click = true;
+                if (ClickImage == null) {
+                    PaintF.Draw.Square(location.X(), location.Y(), size.Width(), size.Height(), Color.red);
+                } else {
+                    PaintF.Draw.Image(location.X(), location.Y(), ClickImage.Get());
                 }
-                else Paint.Draw.Image(location.X(), location.Y(), ClickImage.Get());
-                if(onClick != null)
-                {
+                if (onClick != null) {
                     try {
                         onClick.invoke(null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
-            }   
+            }
         }
 
+        if(Input.GetButtonUp(Mouse.ANY)) 
+        {
+            canclick = true;
+            click = false;
+        }
+
+        if(drawTitle)
+        {
+            int width = (int)PaintF.g.getFontMetrics(Fonts.GetDefault()).getStringBounds(title, PaintF.g).getCenterX();
+            int height = (int)PaintF.g.getFontMetrics(Fonts.GetDefault()).getStringBounds(title, PaintF.g).getCenterY();
+            PaintF.Font = Fonts.GetDefault();
+            PaintF.Draw.String(location.X() + width, location.Y() + size.Height() + height, title, Color.black, Fonts.GetDefault());
+        }
 
     }
 
-    public void OnHover(Class<?> class_, String methodname)
-    {
+    public void OnHover(Class<?> class_, String methodname) {
         try {
             onHover = class_.getMethod(methodname);
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
-    public void OnClick(Class<?> class_, String methodname)
-    {
+    public void OnClick(Class<?> class_, String methodname) {
         try {
             onClick = class_.getMethod(methodname);
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
-    public void SetDefaultImage(Image image)
-    {
+    public void SetDefaultImage(Image image) {
         DefaultImage = image;
     }
 
-    public void SetOnHoverImage(Image image)
-    {
+    public void SetOnHoverImage(Image image) {
         hoverImage = image;
     }
 
-    public void SetOnClickImage(Image image)
-    {
+    public void SetOnClickImage(Image image) {
         ClickImage = image;
     }
 
-    public void SetSize(Size size)
-    {
+    public void SetSize(Size size) {
         this.size = size;
     }
 
-    public void SetLocation(Point location)
-    {
+    public void SetLocation(Point location) {
         this.location = location;
     }
 
-    public Point GetLocation()
-    {   
+    public Point GetLocation() {
         return location;
     }
 
-    public Size GetSize()
-    {
+    public Size GetSize() {
         return size;
+    }
+
+    public boolean Click()
+    {
+        boolean b = click;
+        click = false;
+        return b;
     }
 }

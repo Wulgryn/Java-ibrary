@@ -2,46 +2,37 @@ package Wulgryn.Window.InputHandler;
 
 public class Key {
     public static boolean delay = true;
-    private final boolean[] states = new boolean[]{false, false, false};
+    protected final boolean[] states = new boolean[]{false, false, false};
 
     public boolean GetDown() {
-        return states[0];
+        boolean b = states[0];
+        states[0] = false;
+        return b;
     }
-    protected void SetDown(boolean b)
+    protected void SetDown()
     {
-        if(b)
-        {
-            states[1] = false;
-            states[2] = false;
-        }
-        states[0] = b;
+        states[1] = false;
+        states[2] = false;
+        states[0] = true;
     }
     public boolean GetPressed() 
     {
         return states[1];
     }
-    protected void SetPressed(boolean b)
+    protected void SetPressed()
     {
-        if(b)
-        {
-            states[0] = false;
-            states[2] = false;
-        }
-        states[1] = b;
+        states[0] = false;
+        states[2] = false;
+        states[1] = true;
     }
 
     public boolean GetUp() {
-        boolean b = states[2];
-        states[2] = false;
-        return b;
+        return states[2];
     }
-    protected void SetUp(boolean b)
+    protected void SetUp()
     {
-        if(b)
-        {
-            states[0] = false;
-            states[1] = false;
-        }
-        states[2] = b;
+        states[0] = false;
+        states[1] = false;
+        states[2] = true;
     }
 }

@@ -7,10 +7,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class Image {
-    Size size = new Size(100, 100);
-    BufferedImage image;
-    Graphics graph;
-    Graphics2D graph2D;
+    private Size size = new Size(100, 100);
+    private BufferedImage image;
+    private Graphics graph;
+    private Graphics2D graph2D;
 
     public Image()
     {
@@ -47,5 +47,10 @@ public class Image {
     public Graphics2D GetGraphics2D()
     {
         return graph2D;
+    }
+
+    public Size GetSize()
+    {
+        return size;
     }
 }

@@ -1,5 +1,10 @@
 package Wulgryn.Properties;
 
+import Wulgryn.Parameters.Size;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 public class Common {
     public static void Wait(long millis)
     {
@@ -10,25 +15,14 @@ public class Common {
         }
     }
 
-    public static int LowerHigherNull(float num)
+    public static void DoNothing()
     {
-        if(num > 0) return 1;
-        if(num < 0) return -1;
-        return 0;
+        
     }
 
-    public static float Avarage(float... num)
+    public static Size GetScreenSize()
     {
-        float calc = 0;
-        for(int i = 0; i < num.length; i++)
-        {
-            calc += num[i];
-        }
-        return calc / num.length;
-    }
-
-    public static void ClearUnUsedRam()
-    {
-        System.gc();
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        return new Size(d.width, d.height);
     }
 }

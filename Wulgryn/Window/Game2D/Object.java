@@ -7,8 +7,8 @@ import Wulgryn.Parameters.PointF;
 import Wulgryn.Parameters.Size;
 import Wulgryn.Window.Animation;
 import Wulgryn.Window.Image;
-import Wulgryn.Window.Paint;
 import Wulgryn.Window.Game2D.Components.Collision;
+import Wulgryn.Window.Paint.PaintF;
 
 public class Object {
     Size size = new Size(50,50);
@@ -25,6 +25,7 @@ public class Object {
     
     public boolean HitBox = true;
     public boolean Trigger = true;
+    public boolean EffectOtherObjects = true;
     //-1 to disable
     public int animation_number = -1;
 
@@ -55,6 +56,7 @@ public class Object {
     public void Setup()
     {
         coll = new Collision(location.IntX(), location.IntY(), size.Width(), size.Height());
+        thisID = coll.GetID();
     }
 
     public void SetDefaultImage(Image image)
@@ -66,17 +68,17 @@ public class Object {
     {
         if(animations.length > 0 && animation_number > -1)
         {
-            Paint.Draw.Image(location.X(), location.Y(), animations[animation_number].GetFrame());
+            PaintF.Draw.Image(location.X(), location.Y(), animations[animation_number].GetFrame());
         }
         else
         {
             if(image == null)
             {
-                Paint.Draw.Square(location.X(), location.Y(), size.Width(), size.Height(), Color.orange);
+                PaintF.Draw.Square(location.X(), location.Y(), size.Width(), size.Height(), Color.orange);
             }
             else
             {
-                Paint.Draw.Image(location.X(), location.Y(), image.Get());
+                PaintF.Draw.Image(location.X(), location.Y(), image.Get());
             }
         }
         if(HitBox)
@@ -87,6 +89,10 @@ public class Object {
                 FoundedID = -1;
             }
             coll.Create();
+            /*if(Trigger && EffectOtherObjects)
+            {
+                MoveOtherObjects();
+            }*/
         }
     }
 
@@ -142,8 +148,19 @@ public class Object {
         return size;
     }
 
-    public static void SetFoundedID(int ID)
+    public static void SetSearchingID(int ID)
     {
         FoundedID = ID;
     }
+
+    /*private void MoveOtherObjects()
+    {
+        int collID = coll.GetID(motion.AddMotion(new Motion(0, 0)));
+        System.out.println(collID);
+        if(collID == 0) return;
+        Object.SetSearchingID(collID);
+
+        Object o = FoundedObject;
+        if(o != null) o.Move(new Motion(0, 2));
+    }*/
 }

@@ -6,6 +6,11 @@ public class Fonts {
 
     public static int Style = Font.PLAIN;
     public static int Size = 13;
+
+    public static Font GetDefault()
+    {
+        return new Font("Arial",Font.PLAIN,13);
+    }
     
     public static Font Arial()
     {

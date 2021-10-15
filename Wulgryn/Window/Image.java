@@ -32,6 +32,7 @@ public class Image {
         this.image = image;
         graph = image.getGraphics();
         graph2D = image.createGraphics();
+        size = new Size(image.getWidth(), image.getHeight());
     }
 
     public BufferedImage Get()

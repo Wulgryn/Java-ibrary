@@ -19,11 +19,9 @@ import java.awt.Font;
 import javax.swing.JFrame;
 
 import Wulgryn.Parameters.Point;
-import Wulgryn.Window.Game2D.Components.Collision;
 import Wulgryn.Window.InputHandler.Input;
 import Wulgryn.Window.InputHandler.Keycode;
 import Wulgryn.Window.InputHandler.Mouse;
-import Wulgryn.Window.Paint.PaintF;
 
 public class Frame {
     
@@ -271,20 +269,18 @@ public class Frame {
         window.setVisible(true);
         windowGraphics = window.getGraphics();
 
-        Collision.ResetCollision();
         Start(start);
         if(update != null)new Thread()
         {
             public void run() {
                 FrameCounter fc = new FrameCounter();
                 long last = 0;
-                PaintF.g = (Graphics2D)frame;
+                Paint.g = (Graphics2D)frame;
                 while(true)
                 {
                     if(last + (1000 / FPS_limit) < System.currentTimeMillis())
                     {
                         last = System.currentTimeMillis();
-                        Collision.ResetCollision();
                         LateUpdate(lateUpdate);
                         if(frameImage != null)
                         {
@@ -303,6 +299,26 @@ public class Frame {
                             frame.setFont(new Font("Arial",Font.PLAIN,13));
                             frame.drawString("FPS: " + fc.Get(), 20, 60);
                         }
+
+                        if(Input.lastButton == Input.GetMouseButtonCode())
+                        {
+                            switch(Input.lastButton)
+                            {
+                                case 1:
+                                    Mouse.LEFT.SetPressed();
+                                    break;
+                                case 2:
+                                    Mouse.MIDDLE.SetPressed();
+                                    break;
+                                case 3:
+                                    Mouse.RIGHT.SetPressed();
+                                    break;
+                                case 0:
+                                {
+                                    //Mouse.r
+                                }
+                            }
+                        } 
                     }
                 }
             };
@@ -354,7 +370,7 @@ public class Frame {
             frame = frameImage.getGraphics();
         }
         else frameImage = null;
-        PaintF.g = (Graphics2D)frame;
+        Paint.g = (Graphics2D)frame;
     }
 
     public static int GetFPS()

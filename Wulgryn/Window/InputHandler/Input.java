@@ -22,8 +22,8 @@ public class Input {
     private static int pressedKey;
     private static char pressedChar;
 
-    private static int pressedButton;
-    private static int lastButton;
+    public static int pressedButton;
+    public static int lastButton;
 
     public Input(JFrame window)
     {
@@ -600,6 +600,11 @@ public class Input {
     public static boolean GetButtonDown(MouseButton mouse)
     {
         return mouse.GetDown();
+    }
+
+    public static boolean GetButtonPressed(MouseButton mouse)
+    {
+        return mouse.GetPressed();
     }
 
     public static boolean GetButtonUp(MouseButton mouse)

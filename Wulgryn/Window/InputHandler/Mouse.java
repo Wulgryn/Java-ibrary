@@ -13,14 +13,6 @@ public class Mouse {
 
     private static int direction_ = 0;
 
-    static
-    {
-        ANY = new MouseButton();
-        LEFT = new MouseButton();
-        MIDDLE = new MouseButton();
-        RIGHT = new MouseButton();
-    }
-
     public static Point GetWindowLocation()
     {
         return WindowLocation;
@@ -45,6 +37,11 @@ public class Mouse {
 
     public static void ResetButtons()
     {
+        if(ANY.GetUp()) ANY.states[2] = false;
+        if(LEFT.GetUp()) LEFT.states[2] = false;
+        if(MIDDLE.GetUp()) MIDDLE.states[2] = false;
+        if(RIGHT.GetUp()) RIGHT.states[2] = false;
+
         if(ANY.GetUp()) ANY.states[1] = false;
         if(LEFT.GetUp()) LEFT.states[1] = false;
         if(MIDDLE.GetUp()) MIDDLE.states[1] = false;

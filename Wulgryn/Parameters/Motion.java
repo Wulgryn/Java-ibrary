@@ -21,6 +21,16 @@ public class Motion {
         return motion_[1];
     }
 
+    public int IntX()
+    {
+        return (int)motion_[0];
+    }
+
+    public int IntY()
+    {
+        return (int)motion_[1];
+    }
+
     public Motion AddX(double x)
     {
         motion_[0] += x;
@@ -33,11 +43,26 @@ public class Motion {
         return this;
     }
 
+    public void SetX(double x)
+    {
+        motion_[0] = x;
+    }
+
+    public void SetY(double y)
+    {
+        motion_[1] = y;
+    }
+
     public Motion AddMotion(Motion motion)
     {
         motion_[0] += motion.X();
         motion_[1] += motion.Y();
         return this;
+    }
+
+    public Motion ToInt()
+    {
+        return new Motion((int)motion_[0], (int)motion_[1]);
     }
 
     public void Out()

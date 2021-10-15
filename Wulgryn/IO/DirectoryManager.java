@@ -78,4 +78,35 @@ public class DirectoryManager {
         }
         return null;
     }
+
+    public static int GetDirectoryCount(String path)
+    {
+        try {
+            return new File(path).listFiles(File::isDirectory).length;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static int GetFileCount(String path)
+    {
+        try {
+            return new File(path).listFiles(File::isFile).length;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static int GetFileCount(String path,String extension)
+    {
+        try {
+            FileFilter filter = file -> file.getName().endsWith("." + extension);
+            return new File(path).listFiles(filter).length;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

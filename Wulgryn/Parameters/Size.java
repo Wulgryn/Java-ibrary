@@ -32,6 +32,16 @@ public class Size {
         return this;
     }
 
+    public void SetWidth(int width)
+    {
+        size[0] = width;
+    }
+
+    public void SetHeight(int height)
+    {
+        size[1] = height;
+    }
+
     public Size AddSize(Size size) {
         this.size[0] += size.Width();
         this.size[1] += size.Height();

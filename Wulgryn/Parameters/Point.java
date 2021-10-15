@@ -32,6 +32,16 @@ public class Point {
         return this;
     }
 
+    public void SetX(int x)
+    {
+        point_[0] = x;
+    }
+
+    public void SetY(int y)
+    {
+        point_[1] = y;
+    }
+
     public Point AddPoint(Point point)
     {
         point_[0] += point.X();

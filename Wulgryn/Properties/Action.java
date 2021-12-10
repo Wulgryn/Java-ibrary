@@ -9,6 +9,11 @@ public class Action {
 
     private Consumer<Object> cons = x -> {};
 
+    public Action()
+    {
+        c_list.add(0);
+    }
+
     public Action(Object variable)
     {
         c_list.add(variable);
@@ -25,6 +30,13 @@ public class Action {
         for (Object t : args) {
             c_list.add(t);
         }
+    }
+
+    public Action(Consumer<Object> consumer)
+    {
+        c_list.add(0);
+        SetAction(consumer);
+        Invoke();
     }
 
     public Action(Object variable,Consumer<Object> consumer)
@@ -65,8 +77,9 @@ public class Action {
         }
     }
 
-    public void SetAction(Consumer<Object> consumer)
+    public Action SetAction(Consumer<Object> consumer)
     {
         cons = consumer;
+        return this;
     }
 }

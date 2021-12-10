@@ -11,93 +11,246 @@ public class Fonts {
     {
         return new Font("Arial",Font.PLAIN,13);
     }
-    
-    public static Font Arial()
+    public static class Arial
     {
-        return new Font("Arial",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Arial",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Arial",style,size);
+        }
     }
-    public static Font Helvetica()
+    public static class Helvetica
     {
-        return new Font("Helvetica",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Helvetica",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Helvetica",style,size);
+        }
     }
-    public static Font Garamond()
+    public static class Garamond
     {
-        return new Font("Garamond",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Garamond",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Garamond",style,size);
+        }
     }
-    public static Font Times_New_Roman()
+    public static class Times_New_Roman
     {
-        return new Font("Times New Roman",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Times New Roman",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Times New Roman",style,size);
+        }
     }
-    public static Font Onyx()
+    public static class Onyx
     {
-        return new Font("Onyx",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Onyx",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Onyx",style,size);
+        }
     }
-    public static Font Wingdings_3()
+    public static class Wingdings_3
     {
-        return new Font("Wingdings 3",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Wingdings 3",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Wingdings 3",style,size);
+        }
     }
-    public static Font Cambria()
+    public static class Cambria
     {
-        return new Font("Cambria",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Cambria",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Cambria",style,size);
+        }
     }
-    public static Font Verdana()
+    public static class Verdana
     {
-        return new Font("Verdana",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Verdana",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Verdana",style,size);
+        }
     }
-    public static Font Rockwell()
+    public static class Rockwell
     {
-        return new Font("Rockwell",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Rockwell",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Rockwell",style,size);
+        }
     }
-    public static Font Franklin_Gothic()
+    public static class Franklin_Gothic
     {
-        return new Font("Franklin Gothic",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Franklin Gothic",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Franklin Gothic",style,size);
+        }
     }
-    public static Font FS_Renaissance()
+    public static class FS_Renaissance
     {
-        return new Font("FS Renaissance",Style,Size);
+        public static Font Font()
+        {
+            return new Font("FS Renaissance",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("FS Renaissance",style,size);
+        }
     }
-    public static Font Bookman_Old_Style()
+    public static class Bookman_Old_Style
     {
-        return new Font("Bookman Old Style",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Bookman Old Style",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Bookman Old Style",style,size);
+        }
     }
-    public static Font Goudy_Old_Style()
+    public static class Goudy_Old_Style
     {
-        return new Font("Goudy Old Style",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Goudy Old Style",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Goudy Old Style",style,size);
+        }
     }
-    public static Font Monospaced()
+    public static class Monospaced
     {
-        return new Font("Monospaced",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Monospaced",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Monospaced",style,size);
+        }
     }
-    public static Font Wide_Latin()
+    public static class Wide_Latin
     {
-        return new Font("Wide Latin",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Wide Latin",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Wide Latin",style,size);
+        }
     }
-    public static Font Brush_Script_MT()
+    public static class Brush_Script_MT
     {
-        return new Font("Brush Script MT",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Brush Script MT",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Brush Script MT",style,size);
+        }
     }
-    public static Font Edwardian_Script_ITC()
+    public static class Edwardian_Script_ITC
     {
-        return new Font("Edwardian Script ITC",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Edwardian Script ITC",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Edwardian Script ITC",style,size);
+        }
     }
-    public static Font Matura_MT_Script_Capitals()
+    public static class Matura_MT_Script_Capitals
     {
-        return new Font("Matura MT Script Capitals",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Matura MT Script Capitals",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Matura MT Script Capitals",style,size);
+        }
     }
-    public static Font Lucida_Handwriting()
+    public static class Lucida_Handwriting
     {
-        return new Font("Lucida Handwriting",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Lucida Handwriting",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Lucida Handwriting",style,size);
+        }
     }
-    public static Font Handwriting_Dakota()
+    public static class Handwriting_Dakota
     {
-        return new Font("Handwriting - Dakota",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Handwriting - Dakota",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Handwriting - Dakota",style,size);
+        }
     }
-    public static Font Apple_Chancery()
+    public static class Apple_Chancery
     {
-        return new Font("Apple Chancery",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Apple Chancery",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Apple Chancery",style,size);
+        }
     }
-    public static Font Synchro_LET()
+    public static class Synchro_LET
     {
-        return new Font("Synchro LET",Style,Size);
+        public static Font Font()
+        {
+            return new Font("Synchro LET",Style,Size);
+        }
+        public static Font Font(int style, int size)
+        {
+            return new Font("Synchro LET",style,size);
+        }
     }
 }

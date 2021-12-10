@@ -5,8 +5,9 @@ import java.lang.reflect.Method;
 import Wulgryn.Window.Frame;
 
 public class Wulgryn {
-    public static void InitializeComponent(Class<?> thisClass)
+    public static void InitializeComponent(Class<?> main_class)
     {
+        Frame.SetMainClass(main_class);
         Method setup = null;
         Method start = null;
         Method update = null;
@@ -29,12 +30,12 @@ public class Wulgryn {
         Method activated = null;
         Method deactivated = null;
 
-        Method windowStateChanged = null;
+        Method windowStateChang = null;
 
-        Method onMouseEntered = null;
-        Method onMouseLeaaved = null;
+        Method onMouseEnter = null;
+        Method onMouseLeave = null;
 
-        for (Method method : thisClass.getMethods()) {
+        for (Method method : main_class.getMethods()) {
             switch(method.getName())
             {
                 case "Setup":
@@ -91,14 +92,14 @@ public class Wulgryn {
                 case "Deactivated":
                     deactivated = method;
                     break;
-                case "WindowStateChanged":
-                    windowStateChanged = method;
+                case "WindowStateChang":
+                    windowStateChang = method;
                     break;
                 case "OnMouseEnter":
-                    onMouseEntered = method;
+                    onMouseEnter = method;
                     break;
                 case "OnMouseLeave":
-                    onMouseLeaaved = method;
+                    onMouseLeave = method;
                     break;
             }
         }
@@ -116,9 +117,9 @@ public class Wulgryn {
         Frame.innerMethods[11] = onMaximalized;
         Frame.innerMethods[12] = activated;
         Frame.innerMethods[13] = deactivated;
-        Frame.innerMethods[14] = windowStateChanged;
-        Frame.innerMethods[15] = onMouseEntered;
-        Frame.innerMethods[16] = onMouseLeaaved;
+        Frame.innerMethods[14] = windowStateChang;
+        Frame.innerMethods[15] = onMouseEnter;
+        Frame.innerMethods[16] = onMouseLeave;
         Frame.Render(setup,start,update,lateUpdate);
     }
 }

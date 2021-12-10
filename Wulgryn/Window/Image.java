@@ -1,38 +1,46 @@
 package Wulgryn.Window;
 
-import Wulgryn.Parameters.Size;
-
 import java.awt.image.BufferedImage;
+
+import Wulgryn.Parameters.p2D.Size2Int;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class Image {
-    private Size size = new Size(100, 100);
+    private Size2Int size = new Size2Int(100, 100);
     private BufferedImage image;
     private Graphics graph;
     private Graphics2D graph2D;
 
     public Image()
     {
-        image = new BufferedImage(size.Width(),size.Height(),BufferedImage.TYPE_INT_RGB);
-        graph = image.getGraphics();
-        graph2D = image.createGraphics();
+        try {
+            image = new BufferedImage(size.Width(),size.Height(),BufferedImage.TYPE_INT_RGB);
+            graph = image.getGraphics();
+            graph2D = image.createGraphics();
+        } catch (Exception e) {e.printStackTrace();}
     }
 
-    public Image(Size size)
+    public Image(Size2Int size)
     {
         this.size = size;
-        image = new BufferedImage(size.Width(),size.Height(),BufferedImage.TYPE_INT_RGB);
-        graph = image.getGraphics();
-        graph2D = image.createGraphics();
+        try {
+            image = new BufferedImage(size.Width(),size.Height(),BufferedImage.TYPE_INT_RGB);
+            graph = image.getGraphics();
+            graph2D = image.createGraphics();
+        } catch (Exception e) {e.printStackTrace();}
+        
     }
 
     public Image(BufferedImage image)
     {
         this.image = image;
-        graph = image.getGraphics();
-        graph2D = image.createGraphics();
-        size = new Size(image.getWidth(), image.getHeight());
+        try {
+            graph = image.getGraphics();
+            graph2D = image.createGraphics();
+            size = new Size2Int(image.getWidth(), image.getHeight());
+        } catch (Exception e) {e.printStackTrace();}
     }
 
     public BufferedImage Get()
@@ -50,7 +58,7 @@ public class Image {
         return graph2D;
     }
 
-    public Size GetSize()
+    public Size2Int GetSize()
     {
         return size;
     }

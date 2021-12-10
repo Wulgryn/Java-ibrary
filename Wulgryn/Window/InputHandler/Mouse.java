@@ -1,6 +1,6 @@
 package Wulgryn.Window.InputHandler;
 
-import Wulgryn.Parameters.Point;
+import Wulgryn.Parameters.p2D.Point2Int;
 
 public class Mouse {
     public static MouseButton ANY = new MouseButton();
@@ -8,17 +8,17 @@ public class Mouse {
     public static MouseButton MIDDLE = new MouseButton();
     public static MouseButton RIGHT = new MouseButton();
 
-    protected static Point ScreenLocation;
-    protected static Point WindowLocation = new Point(0, 0);
+    protected static Point2Int ScreenLocation;
+    protected static Point2Int WindowLocation = new Point2Int(0, 0);
 
     private static int direction_ = 0;
 
-    public static Point GetWindowLocation()
+    public static Point2Int GetWindowLocation()
     {
         return WindowLocation;
     }
 
-    public static Point GetScreenLocation()
+    public static Point2Int GetScreenLocation()
     {
         return ScreenLocation;
     }

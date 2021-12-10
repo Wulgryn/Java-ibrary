@@ -10,7 +10,7 @@ import java.awt.event.MouseWheelListener;
 import javax.swing.JFrame;
 import javax.swing.event.MouseInputListener;
 
-import Wulgryn.Parameters.Point;
+import Wulgryn.Parameters.p2D.Point2Int;
 import Wulgryn.Window.Frame;
 
 public class Input {
@@ -25,7 +25,7 @@ public class Input {
     public static int pressedButton;
     public static int lastButton;
 
-    public Input(JFrame window)
+    public Input(JFrame window,Object main_constructor)
     {
         window.setFocusTraversalKeysEnabled(EnableTabAsChar);
         window.addKeyListener(new KeyListener()
@@ -411,7 +411,7 @@ public class Input {
             @Override
             public void mouseEntered(MouseEvent e) {
                 try {
-                    Frame.innerMethods[15].invoke(null);
+                    Frame.innerMethods[15].invoke(main_constructor);
                 } catch (Exception ex) {}
                 
             }
@@ -419,7 +419,7 @@ public class Input {
             @Override
             public void mouseExited(MouseEvent e) {
                 try {
-                    Frame.innerMethods[16].invoke(null);
+                    Frame.innerMethods[16].invoke(main_constructor);
                 } catch (Exception ex) {}
             }
 
@@ -446,8 +446,8 @@ public class Input {
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                Mouse.WindowLocation = new Point(e.getX(), e.getY());
-                Mouse.ScreenLocation = new Point(e.getXOnScreen(), e.getYOnScreen());
+                Mouse.WindowLocation = new Point2Int(e.getX(), e.getY());
+                Mouse.ScreenLocation = new Point2Int(e.getXOnScreen(), e.getYOnScreen());
             }
             
         });

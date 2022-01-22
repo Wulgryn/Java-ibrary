@@ -44,6 +44,10 @@ public class Size2Int {
         return this;
     }
 
+    public Size2Int SetSizeInt(Size2Int size){SetWidth(size.Width());SetHeight(size.Height());return this;}
+
+    public Size2 ToDouble(){return new Size2(Width(), Height());}
+
     public void Out(){System.out.println(Arrays.toString(size));}
 
     public String AsString(){return Arrays.toString(size);}

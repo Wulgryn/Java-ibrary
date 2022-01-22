@@ -15,7 +15,7 @@ public class Button {
 
     public boolean drawOutLine = false;
 
-    public Action click = new Action(-1);
+    public Action click;
 
     public Button(){}
 
@@ -40,7 +40,7 @@ public class Button {
         if(drawOutLine)Paint.Draw.Square.Draw(location.X(),location.Y(),size.Width(),size.Height(),Color.green);
 
         Point2Int mouse = Mouse.GetWindowLocation();
-        if(location.X() < mouse.X() && mouse.X() < location.X() + size.Width() && location.Y() < mouse.Y() && location.Y() + size.Height() > mouse.Y() && Input.GetButtonDown(Mouse.LEFT))
+        if(location.X() < mouse.X() && mouse.X() < location.X() + size.Width() && location.Y() < mouse.Y() && location.Y() + size.Height() > mouse.Y() && Input.GetButtonDown(Mouse.LEFT) && click != null)
         {
             click.Invoke();
         }

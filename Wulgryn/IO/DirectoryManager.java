@@ -137,4 +137,9 @@ public class DirectoryManager {
         }
         return list;
     }
+
+    public static File GetFile(String path)
+    {
+        return new File(path);
+    }
 }

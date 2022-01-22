@@ -48,6 +48,10 @@ public class Vector2 {
         return this;
     }
 
+    public Vector2 SetVector(Vector2 vector){SetX(vector.X());SetY(vector.Y());return this;}
+
+    public Vector2 Invert() {vector[0] = -X();vector[1] = -Y();return this;}
+
     public Vector2Int ToInt(){return new Vector2Int(IntX(), IntY());}
     public void Out(){System.out.println(Arrays.toString(vector));}
     public String AsString(){return Arrays.toString(vector);}

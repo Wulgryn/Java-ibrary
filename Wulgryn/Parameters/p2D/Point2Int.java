@@ -45,6 +45,12 @@ public class Point2Int {
         return this;
     }
 
+    public Point2Int SetPointInt(Point2Int point){SetX(point.X());SetY(point.Y());return this;}
+
+    public Point2Int AddVector2Int(Vector2Int vector) {return AddX(vector.X()).AddY(vector.Y());}
+
+    public Point2 ToDouble(){return new Point2(X(), Y());}
+
     public void Out(){System.out.println(Arrays.toString(point_));}
 
     public String AsString(){return Arrays.toString(point_);}

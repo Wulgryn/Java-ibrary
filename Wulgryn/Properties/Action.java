@@ -9,11 +9,6 @@ public class Action {
 
     private Consumer<Object> cons = x -> {};
 
-    public Action()
-    {
-        c_list.add(0);
-    }
-
     public Action(Object variable)
     {
         c_list.add(variable);
@@ -36,21 +31,18 @@ public class Action {
     {
         c_list.add(0);
         SetAction(consumer);
-        Invoke();
     }
 
     public Action(Object variable,Consumer<Object> consumer)
     {
         c_list.add(variable);
         SetAction(consumer);
-        Invoke();
     }
 
     public Action(List<Object> list,Consumer<Object> consumer)
     {
         c_list = list;
         SetAction(consumer);
-        Invoke();
     }
 
     @SafeVarargs
@@ -60,7 +52,6 @@ public class Action {
             c_list.add(t);
         }
         SetAction(consumer);
-        Invoke();
     }
 
     public void Invoke(Consumer<Object> consumer)

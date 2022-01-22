@@ -30,7 +30,7 @@ public class Size2 {
         return this;
     }
 
-    public Size2 AddSizeD(Size2 sizef)
+    public Size2 AddSize(Size2 sizef)
     {
         size[0] += sizef.Width();
         size[1] += sizef.Height();
@@ -48,6 +48,8 @@ public class Size2 {
         size[1] = height;
         return this;
     }
+
+    public Size2 SetSize(Size2 size){SetWidth(size.Width());SetHeight(size.Height());return this;}
 
     public Size2Int ToInt(){return new Size2Int(IntWidth(), IntHeight());}
 

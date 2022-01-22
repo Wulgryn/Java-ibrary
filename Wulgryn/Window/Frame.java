@@ -17,6 +17,7 @@ import java.util.Arrays;
 
 import javax.swing.JFrame;
 
+import Wulgryn.Game.D2.GameObjects.GameObjectCollector;
 import Wulgryn.Parameters.p2D.Point2Int;
 import Wulgryn.Window.InputHandler.Input;
 import Wulgryn.Window.InputHandler.Keycode;
@@ -264,6 +265,11 @@ public class Frame {
         }
     }
 
+    public static void SetOpacity(float opacity)
+    {
+        window.setOpacity(opacity);
+    }
+
     public static void SetMainClass(Class<?> main_class)
     {
         try {
@@ -287,6 +293,7 @@ public class Frame {
         Paint.SetGraphics2D(frameImage.createGraphics());
         Paint.SetGraphics(frameImage.getGraphics());
         Start(start);
+        GameObjectCollector.Render();
         if(update != null)new Thread()
         {
             public void run() {
@@ -294,9 +301,9 @@ public class Frame {
                 long last = 0;
                 while(true)
                 {
-                    if(last + (1000 / FPS_limit) < System.currentTimeMillis())
+                    if(last + (1000000000 / FPS_limit) < System.nanoTime())
                     {
-                        last = System.currentTimeMillis();
+                        last = System.nanoTime();
                         LateUpdate(lateUpdate);
                         if(frameImage != null && CreateWindow)
                         {
@@ -305,15 +312,17 @@ public class Frame {
                             frame.fillRect(0, 0, frameImage.getWidth(), frameImage.getHeight());
                         }
                         Update(update);
+                        GameObjectCollector.Render();
                         Mouse.ResetButtons();
                         Keycode.ResetKeys();
                         fc.Add();
                         FPS = fc.Get();
                         if(ShowFPS && frameImage != null) 
                         {
+                            frame.setColor(new Color(0,0,0,150));
                             frame.setColor(Color.GREEN);
                             frame.setFont(new Font("Arial",Font.PLAIN,13));
-                            frame.drawString("FPS: " + fc.Get(), 20, 60);
+                            frame.drawString("FPS: " + fc.Get(),51,60);
                         }
                         if(Input.lastButton == Input.GetMouseButtonCode())
                         {

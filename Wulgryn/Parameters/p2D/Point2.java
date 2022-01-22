@@ -41,11 +41,15 @@ public class Point2 {
         return this;
     }
 
-    public Point2 AddPointD(Point2 pointf) {
+    public Point2 AddPoint(Point2 pointf) {
         point_[0] += pointf.X();
         point_[1] += pointf.Y();
         return this;
     }
+
+    public Point2 SetPoint(Point2 point){SetX(point.X());SetY(point.Y());return this;}
+
+    public Point2 AddVector2(Vector2 vector) {return AddX(vector.X()).AddY(vector.Y());}
 
     public Point2Int ToInt(){return new Point2Int(IntX(), IntY());}
 

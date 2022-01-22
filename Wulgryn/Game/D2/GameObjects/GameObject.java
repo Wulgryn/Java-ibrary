@@ -1,14 +1,14 @@
 package Wulgryn.Game.D2.GameObjects;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.geom.*;
 
 import Wulgryn.Game.D2.Components.Components;
 import Wulgryn.Game.D2.Components.ComponentObjects.Transform;
+import Wulgryn.Window.Paint.Paint2D.Paint;
 
 public class GameObject {
-    private Components components = new Components();
+    private Components components = new Components(this);
+    public Color color = Color.CYAN;
 
     public GameObject()
     {
@@ -18,7 +18,7 @@ public class GameObject {
     protected void Render()
     {
         Transform t = (Transform) components.Get(Transform.class);
-        //Paint.Draw.Square(0, 0, t.size.Width(), t.size.Height(), Color.green);
+        Paint.Draw.Square.Draw(t.Position().IntX(), t.Position().IntY(), t.Size().IntWidth(), t.Size().IntHeight(), color);//, t.rotate());
     }
 
     public Components Components()

@@ -10,7 +10,9 @@ public class GameObjectCollector {
     {
         GameObjectCollection.stream().forEach(g -> 
         {
-            //g.Render();
+            g.Render();
         });
     }
+
+    public static List<GameObject> GetGameObjectList(){return GameObjectCollection;}
 }

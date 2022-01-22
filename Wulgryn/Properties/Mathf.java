@@ -1,5 +1,7 @@
 package Wulgryn.Properties;
 
+import java.time.Year;
+
 public class Mathf{
 
     public static int LowerHigherNull(double num)
@@ -41,5 +43,39 @@ public class Mathf{
     public static double Distance(double p, double p1)
     {
         return Math.abs(p1 - p);
+    }
+
+    public static String MilliToTime(long millis)
+    {
+        long mill = millis - (millis / 1000 * 1000);
+        long sec = millis / 1000 - (millis / 1000 / 60 * 60);
+        long min = millis / 1000 / 60 - (millis / 1000 / 60 / 60 * 60);
+        long hour = millis / 1000 / 60 / 60 - (millis / 1000 / 60 / 60 / 24 * 24);
+        long day = millis / 1000 / 60 / 60 / 24 - (millis / 1000 / 60 / 60 / 24 / 365 * 365);
+        long year = millis / 1000 / 60 / 60 / 24 / 365;
+        if(year % 4 == 0) 
+        {
+            day = millis / 1000 / 60 / 60 / 24 - (millis / 1000 / 60 / 60 / 24 / 366 * 366);
+            year = millis / 1000 / 60 / 60 / 24 / 366;
+        }
+        day = millis / 1000 / 60 / 60 / 24 - (millis / 1000 / 60 / 60 / 24 / 365 * 365) - (year / 4);
+        return Common.Listing(year+"Y",day+"D",hour+"H",min+"M",sec+","+mill);
+    }
+
+    public static String NanoToTime(long nanos)
+    {
+        long nano = nanos - (nanos / 1000000 *1000000);
+        long mill = nanos / 1000000 - (nanos / 1000000 / 1000 * 1000);
+        long sec = nanos / 1000000 / 1000 - (nanos / 1000000 / 1000 / 60 * 60);
+        long min = nanos / 1000000 / 1000 / 60 - (nanos / 1000000 / 1000 / 60 / 60 * 60);
+        long hour = nanos / 1000000 / 1000 / 60 / 60 - (nanos / 1000000 / 1000 / 60 / 60 / 24 * 24);
+        long day = nanos / 1000000 / 1000 / 60 / 60 / 24 - (nanos / 1000000 / 1000 / 60 / 60 / 24 / 365 * 365);
+        long year = nanos / 1000000 / 1000 / 60 / 60 / 24 / 365;
+        if(year % 4 == 0)
+        {
+            day = nanos / 1000000 / 1000 / 60 / 60 / 24 - (nanos / 1000000 / 1000 / 60 / 60 / 24 / 366 * 366);
+            year = nanos / 1000000 / 1000 / 60 / 60 / 24 / 366;
+        }
+        return Common.Listing(year+" Y",day+" D",hour+" H",min+" M",sec+" S",mill+","+nano);
     }
 }

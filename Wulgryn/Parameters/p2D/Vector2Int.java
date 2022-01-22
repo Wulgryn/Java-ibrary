@@ -44,6 +44,12 @@ public class Vector2Int {
         this.vector[1] += vector.Y();
         return this;
     }
+
+    public Vector2Int SetVectorInt(Vector2Int vector){SetX(vector.X());SetY(vector.Y());return this;}
+
+    public Vector2Int Invert() {vector[0] = -X();vector[1] = -Y();return this;}
+
+    public Vector2 ToDouble(){return new Vector2(X(), Y());}
     public void Out(){System.out.println(Arrays.toString(vector));}
     public String AsString(){return Arrays.toString(vector);}
 

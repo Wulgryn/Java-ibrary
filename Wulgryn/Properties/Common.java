@@ -2,7 +2,6 @@ package Wulgryn.Properties;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.Arrays;
 
 import Wulgryn.Parameters.p2D.Size2Int;
 
@@ -12,6 +11,11 @@ public class Common {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {}
+    }
+
+    public static void DoSomething()
+    {
+        DoNothing();
     }
 
     public static void DoNothing()
@@ -25,15 +29,26 @@ public class Common {
         return new Size2Int(d.width, d.height);
     }
 
-    static String fin;
     public static void Out(Object... args)
     {
-        fin = "";
-        Arrays.asList(args).stream().forEach(f -> 
-        {
-            fin += " : " + f.toString();
-        });
+        String fin = "";
+        for (Object f : args) {
+            if(f != null)fin += " : " + f.toString();
+        }
         fin = fin.trim().substring(1,fin.length() - 1);
         System.out.println(fin);
+    }
+
+    public static Object[] Swap(Object a, Object b) {return new Object[]{b,a};}
+
+    public static String Listing(Object... args)
+    {
+        String s = "";
+        for(int i = 0; i < args.length;i++)
+        {
+            if(i < args.length - 1)s += args[i] + " : ";
+            else s += args[i];
+        }
+        return s;
     }
 }

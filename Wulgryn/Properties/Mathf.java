@@ -1,7 +1,5 @@
 package Wulgryn.Properties;
 
-import java.time.Year;
-
 public class Mathf{
 
     public static int LowerHigherNull(double num)

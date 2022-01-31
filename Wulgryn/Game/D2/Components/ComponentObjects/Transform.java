@@ -16,20 +16,23 @@ public class Transform {
     public boolean isCollide = true;
     public boolean isTrigger = true;
 
-    public static long FPS_Limit = 60;
-
     GameObject gameObject;
 
     public Transform(GameObject gameobject) {gameObject = gameobject;}
 
+    long last = 0;
     public Transform Move(Vector2 v)
     {
-        if(!isCollide)
+        if(last + (1000000000 / GameObject.RenderFPSLimit) < System.nanoTime())
         {
-            location.AddX(v.X()).AddY(v.Y());
-            return this;
+            last = System.nanoTime();
+            if(!isCollide)
+            {
+                location.AddX(v.X()).AddY(v.Y());
+                return this;
+            }
+            location.AddVector2(ColliderCollection.CalculateVector2(gameObject, v));
         }
-        ColliderCollection.TryMove(gameObject, v);
         return this;
     }
 

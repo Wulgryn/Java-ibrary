@@ -10,11 +10,14 @@ public class GameObject {
     private Components components = new Components(this);
     public Color color = Color.CYAN;
 
+    public static int RenderFPSLimit = 120;
+
     public GameObject()
     {
         GameObjectCollector.GameObjectCollection.add(this);
         components.Add(Transform.class);
     }
+
     protected void Render()
     {
         Transform t = (Transform) components.Get(Transform.class);

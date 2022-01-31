@@ -1,32 +1,40 @@
 package Wulgryn.Properties;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class Stopper {
-    private List<Long> times = new ArrayList<Long>();
-
+    private HashMap<String,Long> times = new HashMap<String,Long>();
+    private int id = 0;
 
     private long time = 0;
+    private String name = "";
     public void Start()
     {
-        time = System.currentTimeMillis();
+        time = System.nanoTime();
+        name = id + "";
+        id++;
+    }
+
+    public void Start(String name)
+    {
+        time = System.nanoTime();
+        this.name = name;
     }
 
     public void Stop()
     {
-        times.add(System.currentTimeMillis() - time);
+        times.put(name, System.nanoTime() - time);
     }
 
     public void ListTimes()
     {
-        times.forEach(t ->
-        {
-            Common.Out(times.indexOf(t),Mathf.MilliToTime(t));
-        });
+        for (String name : times.keySet()) {
+            Common.Out(name,times.get(name) + " nanosec",times.get(name) / 1000000 + " millisec");
+        }
     }
 
     public int GetTimesCount() {return times.size();}
 
-    public long GetTime(int index) {return times.get(index);}
+    public long GetTime(int index) {return times.values().stream().toList().get(index);}
+    public long GetTime(String name){return times.get(name);}
 }

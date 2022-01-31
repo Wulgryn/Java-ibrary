@@ -66,6 +66,25 @@ public class Line {
         return p;
     }
 
+    public int GetGrandParentsCount()
+    {
+        int number = 0;
+        Line p = this;
+        while(p.parent != null)
+        {
+            number++;
+            p = p.parent;
+        }
+        return number;
+    }
+
+    public void SetLineID(int line_id)
+    {
+        this.line_id = line_id;
+    }
+
+    public int GetLineID() {return line_id;}
+
     public Line Out()
     {
         System.out.println(GetText());
